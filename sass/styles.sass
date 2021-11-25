@@ -1,0 +1,202 @@
+// Importação de arquivos (Não é necessário _ e nem a extenção do arquivo).
+@use 'variables'
+@use 'mixins'
+
+@charset "UTF-8"
+
+// Google Fonts 
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500&display=swap')
+
+// Variáveis
+// $primary-color: #FFF
+// $secondary-color: #20cC9997
+// $text-color: #777
+// $bg-color: #000
+// $container-width: 1170px
+
+
+// ------------- Reset das configurações da página -------------
+*
+	// Toda a página terá o tipo e letra 'Josefin Sans'
+	font-family: 'Josefin Sans'
+
+	// Remove a margin interna de todos os elementos.
+	padding: 0
+
+	// Remove a margin externa de todos os elementos.
+	margin: 0
+
+	// Limita o espaço de todos os elementos, não permitindo
+	// que ocupe além do seu espaço. Ocorre muito em inputs.
+	box-sizing: border-box
+
+body
+	// Cor de fundo da página.
+	background: variables.$bg-color
+
+	// Cor da fonte.
+	color: variables.$text-color
+
+	// Atribuição de especificidade.
+	a
+		// Cor da fonte.
+		color: variables.$text-color
+		// Remove a decoreção padrão do link a.
+		text-decoration: none
+		// Velocidade de transição da prorpiedade ":hover". 
+		transition: .4s
+
+	ul
+		// Remove os marcadores.
+		list-style: none
+
+// ----------------- Cabeçário -----------------
+.header
+	// O elemento passa a ser um flex container.
+	display: flex
+
+	// Todos os elementos terão o mesmo espaçamento.
+	justify-content: space-between
+
+	// Adicionar um mixins (função)
+	@include mixins.container
+
+	@include mixins.mobile
+		padding: 1.1rem
+
+	// Parent Selector - Referência ao seletor externo.
+	&-brand // .header-brand
+		color: variables.$primary-color
+		font-size: 3rem
+
+	&-navbar // .header-navbar
+		
+		ul
+			height: 100% 
+
+			// Adicionar o mixins flex-center do arquivo mixins.
+			@include mixins.flex-center
+
+			@include mixins.mobile
+				display: none
+
+			li
+				margin: 0 1rem
+				text-transform: uppercase
+				font-size: .8rem
+
+				.active
+					color: variables.$secondary-color
+
+				a 
+					&:hover
+						color: variables.$secondary-color
+
+	&-social-media
+
+		ul 
+			@include mixins.flex-center
+			height: 100%
+
+			@include mixins.mobile
+				display: none
+
+			li 
+				margin: 0 1rem
+
+				a 
+					&:hover
+						color: variables.$primary-color
+
+// ----------------- Gallery -----------------
+
+.gallery
+	@include mixins.flex-center
+	@include mixins.container
+	flex-wrap: wrap
+	justify-content: space-between
+	padding: 0
+
+	@include mixins.mobile
+		flex-direction: column
+
+	&-card //.gallery-card
+		width: 31%
+		height: 400px
+		margin-bottom: 4%
+		@include mixins.flex-center
+
+		// Em coluna - Para deixar o texto
+		// em acima do botão.
+		flex-direction: column
+
+		color: variables.$primary-color
+
+		@include mixins.mobile
+			width: 90%
+			margin-bottom: 6%
+
+		&-title
+			font-size: 2rem
+			font-weight: 300
+			margin-bottom: 1rem
+
+		&-btn
+			// Margin interna.
+			padding: .6rem 2rem
+
+			// Borda do elemento
+			border: 2px solid variables.$primary-color
+
+			// Cor da fonte
+			color: variables.$primary-color
+
+			// Negrito
+			font-weight: 400
+
+			// Letras em maiúsculo
+			text-transform: uppercase
+
+			// Espaçamento entre as letras
+			letter-spacing: 1px
+
+			&:hover
+				background: variables.$primary-color
+				color: variables.$bg-color
+
+	#card-1
+		@include mixins.bg-img('animais.jpg')
+
+	#card-2
+		@include mixins.bg-img('arquitetura.jpg')
+
+	#card-3
+		@include mixins.bg-img('cidade.jpg')
+
+	#card-4
+		@include mixins.bg-img('decoracao.jpg')
+
+	#card-5
+		@include mixins.bg-img('esportes.jpg')
+
+	#card-6
+		@include mixins.bg-img('natureza.jpg')
+
+	#card-7
+		@include mixins.bg-img('paisagem.jpg')
+
+	#card-8
+		@include mixins.bg-img('pessoas.jpg')
+
+	#card-9
+		@include mixins.bg-img('refeicoes.jpg')
+
+// ----------------- Footer -----------------
+footer
+	text-align: center
+	padding-bottom: 2rem
+
+
+	span
+		font-weight: bold
+		color: variables.$secondary-color

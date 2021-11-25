@@ -1,0 +1,59 @@
+@use 'variables'
+
+// Extrutura de CSS que permite replicar o código
+// em várias partes da aplicação.
+// É como uma função (reaproveitar o código).
+@mixin container
+	// Largura máxima do elemento.
+	max-width: variables.$container-width
+
+	// Margem interna
+	// (superior e inferior / direita esquerda)
+	padding: 1.5rem 0
+
+	// Margem externa
+	// (superior e inferior / direita esquerda)
+	margin: 0 auto
+
+@mixin flex-center
+	display: flex
+	align-items: center
+	justify-content: center
+
+// Mixin com parâmetos.
+@mixin bg-img($img)
+
+	// Adiciona a imagem como plano de fundo.
+	background: url('../img/#{$img}')
+
+	// Ocupará 100% do container .
+	background-size: 100%
+
+	// Posiciona a imagem no centro do elemento.
+	background-position: center
+
+	// Não vai repetir a imagem.
+	background-repeat: no-repeat
+
+	// Deixa a imagem sem cor (preto e branco)
+	filter: grayscale(100%)
+
+	// Transição para a propriedade ":hover"
+	transition: .6s
+
+	&:hover
+		// Aumenta a tamanho da imagem 
+		// para ter efeito de zoom.
+		background-size: 110%
+
+		// Apresenta a cor da imagem
+		filter: grayscale(0%)
+
+		// Cria uma opacidade na imagem
+		background-image: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url('../img/#{$img}')
+
+// Trabalhar @media em mixin
+// Aplicado a regra e as propriedades dentro do estilo do elemento.
+@mixin mobile
+	@media(max-width: 425px)
+		@content
